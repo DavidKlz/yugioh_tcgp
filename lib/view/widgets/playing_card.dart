@@ -35,7 +35,7 @@ class _PlayingCardState extends State<PlayingCard>
     super.initState();
 
     controller = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 250));
+        vsync: this, duration: const Duration(milliseconds: 400));
     controller.addListener(
       () {
         setState(() {
@@ -75,21 +75,17 @@ class _PlayingCardState extends State<PlayingCard>
               BoxShadow(
                 color: Colors.black,
                 blurRadius: 4,
+                blurStyle: BlurStyle.inner,
               ),
             ],
           ),
           child: isFront
               ? CachedNetworkImage(
                   imageUrl: widget.card.imageUrl,
-                  placeholder: (context, url) => Stack(
-                    alignment: Alignment.center,
-                    children: [
+                  placeholder: (context, url) =>
                       Image.asset("assets/cardback.png"),
-                      const CircularProgressIndicator(
-                        color: Colors.white,
-                      ),
-                    ],
-                  ),
+                  fadeInDuration: const Duration(milliseconds: 0),
+                  fadeOutDuration: const Duration(milliseconds: 0),
                 )
               : Image.asset("assets/cardback.png"),
         ),
